@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css"/>
+</head>
+
+<body>
+{{> header}}
+{{#username}}
+<form method = 'GET' action = '/logout'>
+    <button class="buttons">Logout {{username}}</button>
+</form>
+{{/username}}
+{{^username}}
+<p>Not logged in</p>
+{{/username}}
+<h2>User: {{user.name}}</h2>
+<h2>Title: {{post.title}}</h2>
+<h3>Post:</h3>
+<p>{{post.body}}</p>
+<h3>Add a comment</h3>
+<form method = 'POST' action='/add-comment'>
+  <textarea rows="5" cols="50" name="body" placeholder="body"></textarea>
+  <button  class="buttons">Submit</button>
+</form>
+{{#comments}}
+<form method='POST' action = '/delete-comment'>
+  <h3>User: {{name}}</h3>
+  <p>Comment: {{body}}</p>
+  <input type="hidden" value={{id}} name="del_comment">
+  <button class="buttons" {{hidden}}>Remove</button>
+</form>
+<form method = 'POST' action='/update-comment' {{hidden}}>
+  <input type="hidden" value={{id}} name="update_comment">
+  <textarea rows="5" cols="50" name="body" placeholder="body"></textarea>
+  <button  class="buttons">Update</button>
+</form>
+{{/comments}}
+{{^comments}}
+<p>No comments yet.</p>
+{{/comments}}
+</body>
+</html>

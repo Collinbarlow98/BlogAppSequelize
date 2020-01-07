@@ -1,0 +1,22 @@
+
+<html>
+<head></head>
+
+<body>
+{{> header}}
+<ul>
+  {{#posts}}
+  <li {{hidden}}>
+    <b>{{title}}</b>
+    <p>comments: {{comments}}</p>
+    <form method="POST" action="/post-detail">
+      <input type="hidden" name="postId" value="{{id}}">
+      <input type="submit" name="submit" value="Details">
+    </form>
+  </li>
+  {{/posts}}
+</ul>
+
+</body>
+
+</html>
